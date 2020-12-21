@@ -63,7 +63,7 @@ const resolvers = {
         deleteBook: async (parent, args, context) =>{
             User.findOneAndUpdate(
                 {_id: context.user_id},
-                {$pull},
+                {$pull: {savedBooks: {bookId: args.bookId}}},
                 {new: true}
             )
             //I feel like there's a lot missing here, including what exactly to include in the pull, I'm gonna workshop for a bit and revisit
