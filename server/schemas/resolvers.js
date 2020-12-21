@@ -61,12 +61,17 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         deleteBook: async (parent, args, context) =>{
-            User.findOneAndUpdate(
+            const newUser = User.findOneAndUpdate(
                 {_id: context.user_id},
                 {$pull: {savedBooks: {bookId: args.bookId}}},
                 {new: true}
             )
-            //I feel like there's a lot missing here, including what exactly to include in the pull, I'm gonna workshop for a bit and revisit
+            
+
+            if(!newUser){
+                return "something went wrong"
+            }
+            return newUser
         } 
     },
 }
