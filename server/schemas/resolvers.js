@@ -46,6 +46,9 @@ const resolvers = {
             //I should also keep in mind that this isn't C++ and I'm not gonna be whipped for having code that's slower by a fraction of a nanosecond
             //I may edit this later
             //on further thought, as long as the book object is doin it's thing I don't see why there's need to check if user is doing its thing
+
+
+            //Scratch everything above, I just now realized I had to return the user for practicality.
             if (context.user) {
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
@@ -53,7 +56,7 @@ const resolvers = {
                     { new: true }
                 );
 
-                return book;
+                return user;
             }
 
             throw new AuthenticationError('You need to be logged in!');
