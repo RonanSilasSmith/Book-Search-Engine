@@ -47,11 +47,9 @@ const resolvers = {
             //I may edit this later
             //on further thought, as long as the book object is doin it's thing I don't see why there's need to check if user is doing its thing
             if (context.user) {
-                const book = await Book.create({ ...args});
-
-                await User.findByIdAndUpdate(
+                const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $push: { savedBooks: book } },
+                    { $push: { savedBooks: args } },
                     { new: true }
                 );
 
